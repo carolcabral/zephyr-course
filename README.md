@@ -13,3 +13,16 @@ Follow the following guide:
 
 Make sure to select appropriate OS and to perform all steps till
 [Build the Blinky Sample](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#build-the-blinky-sample).
+
+
+## Boards
+
+**Nucleo L423KC**
+
+[Nucleo L432KC Zephyr Documentation](https://docs.zephyrproject.org/latest/boards/st/nucleo_l432kc/doc/index.html)
+
+```
+west build -b nucleo_l432kc -p always app
+west flash --runner stm32cubeprogrammer
+```
+
