@@ -26,3 +26,29 @@ west build -b nucleo_l432kc -p always app
 west flash --runner stm32cubeprogrammer
 ```
 
+## Lecture 03 - App configuration KConfig
+
+### Config file roles
+
+| File  | Purpose |
+|------|----------|
+| `prj.conf` | App-specific options; checked into repo; survives board changes |
+| `defconfig` | Hardware defaults for a specific board/SoC; don't edit unless writing a board port |
+| `build/zephyr/.config` | Merged result of all sources; edited by menuconfig |
+| `build/zephyr/include/generated/zephyr/autoconf.h` | C macros generated from `.config`; updated only on rebuild |
+
+**Merge order** (last wins):
+```
+Kconfig defaults → defconfig → prj.conf → menuconfig (.config)
+```
+- `prj.conf` overrides `defconfig`, and a manual `menuconfig` change overrides both — but only until the next pristine build wipes `.config.`
+
+### Menuconfig
+
+```sh
+west build -t menuconfig   # opens the interactive config UI
+west build                 # rebuild to apply changes to autoconf.h
+```
+
+Menuconfig saves choices to `build/zephyr/.config`. **`autoconf.h` is only updated when you rebuild** — changing an option in menuconfig without rebuilding has no effect on the compiled binary.
+- `-p always` deletes the entire build directory!
