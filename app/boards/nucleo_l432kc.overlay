@@ -1,0 +1,12 @@
+/ { 
+    leds {
+        board_led: led_1 { 
+            gpios = <&gpiob 3 GPIO_ACTIVE_HIGH>;
+            label = "LED from board overlay";
+        };
+    };
+
+    aliases {
+		led0 = &board_led;
+	};
+};
