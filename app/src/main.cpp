@@ -4,7 +4,7 @@
 
 
 /* The devicetree node identifier for the "led0" alias. */
-#define LED_NODE DT_ALIAS(led0)
+#define LED_NODE DT_ALIAS(app_led)
 
 // #define LED_NODE DT_NODELABEL(board_led)
 // #define LED_NODE DT_PATH(leds, led_1)
@@ -29,7 +29,7 @@ int main(void)
 
         led_state = !led_state;
         LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
-        k_msleep(CONFIG_LED_BLINK_TIME_MS);
+        k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
     }
     return 0;
 }

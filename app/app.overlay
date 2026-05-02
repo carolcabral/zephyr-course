@@ -7,6 +7,6 @@
     };
 
     aliases {
-		led0 = &app_led;
+		app-led = &app_led;
 	};
 };
