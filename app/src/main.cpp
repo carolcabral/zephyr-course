@@ -9,6 +9,9 @@
 // #define LED_NODE DT_NODELABEL(board_led)
 // #define LED_NODE DT_PATH(leds, led_1)
 
+// #define LED_NODE DT_NODELABEL(app_led)
+// #define LED_NODE DT_PATH(leds, led_2)
+
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
