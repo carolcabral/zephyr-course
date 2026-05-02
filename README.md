@@ -52,3 +52,30 @@ west build                 # rebuild to apply changes to autoconf.h
 
 Menuconfig saves choices to `build/zephyr/.config`. **`autoconf.h` is only updated when you rebuild** — changing an option in menuconfig without rebuilding has no effect on the compiled binary.
 - `-p always` deletes the entire build directory!
+## Lecture 04 - App configuration: DTS
+
+- Auto-discovery (when DTC_OVERLAY_FILE is not set): **Stops at first match**
+
+1. `boards/<BOARD>.overlay` - matched by board name
+2. `app.overlay` - fallback if no board overlay is found
+
+```
+# Force a specific overlay
+west build -- -DDTC_OVERLAY_FILE="boards/<>.overlay"
+
+# Add extra overlay on top of auto-dicovered ones
+west build -- -DEXTRA_DTC_OVERLAY_FILE="my_extra.overlay
+```
+
+- Accessing nodes from C code:
+
+```
+// By alias
+#define LED_NODE DT_ALIAS(led0)
+
+// By node label (when no alias exists)
+#define LED_NODE DT_NODELABEL(blue_led)
+
+// By path (rarely used)
+#define LED_NODE DT_ALIAS(leds, led_name)
+```
