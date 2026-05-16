@@ -1,0 +1,6 @@
+board:
+  name: my_board
+  full_name: Custom Board from Scratch
+  vendor: iomico
+  socs:
+    - name: stm32l432xx

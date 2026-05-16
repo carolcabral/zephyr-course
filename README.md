@@ -17,9 +17,7 @@ Make sure to select appropriate OS and to perform all steps till
 
 ## Boards
 
-**Nucleo L423KC**
-
-[Nucleo L432KC Zephyr Documentation](https://docs.zephyrproject.org/latest/boards/st/nucleo_l432kc/doc/index.html)
+**Nucleo L423KC**: [Nucleo L432KC Zephyr Documentation](https://docs.zephyrproject.org/latest/boards/st/nucleo_l432kc/doc/index.html)
 
 ```
 west build -b nucleo_l432kc -p always app
@@ -79,3 +77,28 @@ west build -- -DEXTRA_DTC_OVERLAY_FILE="my_extra.overlay
 // By path (rarely used)
 #define LED_NODE DT_ALIAS(leds, led_name)
 ```
+
+## Lecture 05 - Custom boards
+
+- Naming: `board_name@revision/soc/cpu_cluster/variant`
+    - Example: `nrf5340dx/nrf5340/cpuapp`
+
+- Minimal files:
+```
+boards/
+    our_board/
+        # Minimal files
+        board.yml
+        our_board.dts 
+        Kconfig.our_board
+        
+        # Good to have
+        board.cmake
+        Kconfig.defconfig
+        our_board_defconfig
+        our_board_pinctrl.dtsi
+```
+
+- Command to build: `west build -b our_board --board-dir boards/out_board`
+    - Or add to CMakeLists.txt: `list(APPEND BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})`
+
