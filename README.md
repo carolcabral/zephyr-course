@@ -102,3 +102,30 @@ boards/
 - Command to build: `west build -b our_board --board-dir boards/out_board`
     - Or add to CMakeLists.txt: `list(APPEND BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})`
 
+
+# Lecture 06 - Driver Development
+
+- Driver: a software component that abstracts a hardware peripheral
+    - Implements a standard Zephyr API
+    - Usually controlled by Kconfig and instantiated from the Device Tree
+    - Lets applications stay hardware-agnostic across boards
+
+- Module: is a package concept - a West-managed repository
+    - Contains drivers, libraries, HALS, utilities
+    - Examples: mbedTLS, littlefs, vendor's HALs
+
+- Driver Lifecycle:
+    - DTS nodes declares `compatible = "our,driver"`
+    - Binding defined that compatible string
+    - Kconfig symbol enables compilation
+    - CMake compiles driver sources
+    - Driver instance is created from DTS
+    - Application gets device handle and uses API
+
+- Module Registration & Build: West discovery & module-level config
+    - zephyr/module.yml: Tells Zephyr where to find CMake, Kconfig, and DTS bindings
+
+
+
+LOG_MODULE_REGISTER - first time registering log module
+LOG_MODULE_DECLARE - use multiple times for the same log module in different files 

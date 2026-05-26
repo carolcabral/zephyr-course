@@ -74,5 +74,6 @@ if LED_SUBSYSTEM
 
 endif
 source "Kconfig.zephyr"
+source "$(APP_DIR)/drivers/our_driver/Kconfig"
 
 

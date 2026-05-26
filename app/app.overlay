@@ -9,4 +9,10 @@
     aliases {
 		app-led = &app_led;
 	};
+
+    our_driver0: our_driver {
+        compatible = "our,driver";
+        status = "okay";
+        led-gpios = <&gpiob 3 GPIO_ACTIVE_HIGH>;
+    };
 };
