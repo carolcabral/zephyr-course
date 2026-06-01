@@ -1,12 +1,14 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/sensor.h>
 #include <zephyr/logging/log.h>
+#include "my_driver.h"
 
 #define DT_DRV_COMPAT our_driver
 
 LOG_MODULE_REGISTER(our_driver, LOG_LEVEL_INF);
 
 struct led_sensor_data {
+    uint32_t blink_interval_ms;
 };
 
 struct led_sensor_config {
@@ -31,6 +33,15 @@ static int channel_get_impl(const struct device *dev,
     val->val1 = 0;
     val->val2 = 0;
     return gpio_pin_set_dt(&cfg->led, 0);
+}
+
+int led_sensor_set_blink_interval(const struct device *dev, uint32_t interval_ms)
+{
+    struct led_sensor_data *data = dev->data;
+
+    LOG_INF("Setting blink interval to %u ms", interval_ms);
+    data->blink_interval_ms = interval_ms;
+    return 0;
 }
 
 static DEVICE_API(sensor, led_sensor_api) = {

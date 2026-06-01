@@ -2,6 +2,7 @@
 #include <zephyr/drivers/sensor.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <my_driver.h>
 
 
 /* The devicetree node identifier for the "led0" alias. */
@@ -23,6 +24,9 @@ namespace
     void test(){
         const struct device *driver = DEVICE_DT_GET(DT_NODELABEL(our_driver0));
         struct sensor_value val;
+
+        led_sensor_set_blink_interval(driver, 500);
+
         auto ret = sensor_channel_get(driver, SENSOR_CHAN_AMBIENT_TEMP, &val);
         LOG_INF("Channel ret %d", ret);
     }
